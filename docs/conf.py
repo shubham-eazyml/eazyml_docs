@@ -36,7 +36,10 @@ os.environ["READTHEDOCS_VERSION"] = "latest"
 os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 
 # Mock missing modules or dependencies
-autodoc_mock_imports = ['utility', 'eazyml', 'eazyml_augi']
+autodoc_mock_imports = [
+    'utility', 'eazyml', 'eazyml_augi',
+    'eazyml_augi.utility',
+]
 
 # Optional: Build Documentation Without Importing Modules: 
 autodoc_default_options = {
