@@ -38,16 +38,106 @@ def ez_data_quality(filename, outcome, options):
             The target variable (outcome) to assess data quality against.
         - **options** (dict, optional):
             A dictionary specifying additional configurations for data quality checks. 
-        
+
     Returns :
-        - **Dictionary with Fields** :
-            - **success** (bool): Indicates whether the inference was successful.
+         - **Dictionary with Fields**:
+            - **success** (bool): Indicates whether the operation was successful.
+            - **message** (str): Provides details about the outcome or an error message if the operation failed.
+            - **data_shape_quality** (dict, optional): Contains results of data shape quality checks.
+            - **data_emptiness_quality** (dict, optional): Includes results of data emptiness checks, such as the presence of missing or null values.
+            - **data_outliers_quality** (dict, optional): Provides insights into the presence of outliers.
+            - **data_balance_quality** (dict, optional): Contains information about the balance of data.
+            - **data_correlation_quality** (dict, optional): Includes results of correlation checks, identifying highly correlated features or potential redundancies.
+            - **data_bad_quality_alerts** (dict, optional): Summarizes critical quality issues detected, with the following fields:
+                - **data_shape_alert** (bool): Indicates if there are structural issues with the data (e.g., mismatched dimensions, irregular shapes).
+                - **data_balance_alert** (bool): Flags issues with data balance (e.g., uneven class distributions).
+                - **data_emptiness_alert** (bool): Signals significant levels of missing or null data.
+                - **data_outliers_alert** (bool): Highlights the presence of extreme outliers that may affect data quality.
+                - **data_correlation_alert** (bool): Flags excessive correlation among features that could lead to redundancy or multicollinearity.
+
+
+        **On Success** :
+        A JSON response with
+
+        .. code-block:: json
+
+            {
+                "success": true,
+                "message": "Data quality checks according to given options have been calculated successfully",
+                "data_shape_quality": {
+                    "Dataset_dimension": [".."],
+                    "alert": [".."],
+                    "message": "No of columns in dataset is not adequate because the no of rows in the dataset is less than the no of columns",
+                    "success": true
+                },
+                "data_emptiness_quality": {
+                    "message": "There are no missing values present in the training data that was uploaded. Hence no records were imputed.",
+                    "success": true
+                },
+                "data_outliers_quality": {
+                    "message": "The following data points were removed as outliers.",
+                    "outliers": {
+                        "columns": [".."],
+                        "indices": [".."]
+                    },
+                    "success": true
+                },
+                "data_balance_quality": {
+                    "data_balance": {
+                        "data_balance_analysis": {
+                            "balance_score": [".."],
+                            "data_balance": true,
+                            "decision_threshold": [".."],
+                            "quality_message": "Uploaded data is balanced because the balance score is greater than given threshold"
+                        }
+                    },
+                    "message": "Data balance has been checked successfully",
+                    "success": true
+                },
+                "data_correlation_quality": {
+                    "data_correlation": "dict containing column wise correlationa"
+                    },
+                    "data_correlation_alert": "true",
+                    "message": "Correlation has been calculated successfully between all features and all features with outcome",
+                    "success": true
+                },
+                "data_bad_quality_alerts": {
+                    "data_shape_alert": "true/false",
+                    "data_balance_alert": "true/false",
+                    "data_emptiness_alert": "true/false",
+                    "data_outliers_alert": "true/false",
+                    "data_correlation_alert": "true/false"
+                }
+            }
+
+        **On Failure**:
+        A JSON response with
+
+        .. code-block:: json
+
+            {
+                "success": false,
+                "message": "Error message"
+            }
+
+        **Raises Exception**:
+            - Captures and logs unexpected errors, returning a failure message with an internal server error indication.
+
 
     Example :
         .. code-block:: python
 
             ez_data_quality(
                 filename = 'train/file/path.csv',
+                outcome = "outcome column"
+                options = {
+                    "data_shape": "yes",
+                    "data_balance": "yes",
+                    "data_emptiness": "yes",
+                    "data_outliers": "yes",
+                    "remove_outliers": "yes",
+                    "outcome_correlation": "yes"
+                }
             )
     """
     if not filename or not outcome:

@@ -117,10 +117,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 html_theme = 'sphinx_rtd_theme'
 
-html_theme_options = {
-    'display_version': False,  # Hide the version badge
-}
-
 # Hide view page source link at top
 html_show_sourcelink = False
 

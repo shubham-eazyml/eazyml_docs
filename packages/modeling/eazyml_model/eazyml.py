@@ -450,18 +450,18 @@ def ez_predict(test_data, options, custom=False):
 
 def ez_display_json(resp):
     """
-    Function to display formated json
+    Function to display formatted json
     """
     return display_json(resp)
 
 def ez_display_df(resp):
     """
-    Function to display formated dataframe
+    Function to display formatted dataframe
     """
     return display_df(resp)
 
 def ez_display_md(resp):
     """
-    Function to display formated markdown
+    Function to display formatted markdown
     """
     return display_md(resp)
