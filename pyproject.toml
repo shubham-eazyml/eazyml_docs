@@ -14,10 +14,13 @@ dependencies = [
     "sphinx-rtd-theme>=1.0"
 ]
 
+[tool.setuptools.packages.find]
+where = ["docs"]
+
 [tool.sphinx]
 # Optional Sphinx-specific settings
-source-dir = "docs"
-build-dir = "build"
+source-dir = ""
+build-dir = "_build"
 builder = "html"
 
 [tool.black]
