@@ -12,9 +12,6 @@ sample apps, and resources for testing out EazyML apis.
    :maxdepth: 2
    
    Augmented Intelligence <augi.rst>
-   Explainable AI <xai.rst>
-   Image Explainable AI <image_xai.rst>
-   Counterfactual <counterfactual.rst>
 
 
 

@@ -13,18 +13,6 @@ users by offering features such as no-code interfaces, explainable AI,
 and integration capabilities with existing workflows.
 
 
-.. toctree::
-   :caption: packages
-   :maxdepth: 2
-   :hidden:
-
-   Explainable AI <packages/eazyml_xai.rst>
-   Augmented Intelligence <packages/eazyml_augi.rst>
-   Image Explainable AI <packages/eazyml_xai_image.rst>
-   Counterfactual <packages/eazyml_cf.rst>
-   Data Quality <packages/eazyml_dq.rst>
-   Modeling <packages/eazyml_model.rst>
-
 
 .. toctree::
    :caption: NOTEBOOKS
