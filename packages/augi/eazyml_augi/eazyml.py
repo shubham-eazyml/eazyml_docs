@@ -2,7 +2,12 @@
 EazyML Augmented Intelligence extract insights from Dataset with certain insights
 score which is calculated using coverage of that insights.
 """
-from .utility import transparency_api as tr_api
+from .utility.transparency_api import (
+    INTERNAL_SERVER_ERROR, INVALID_DATATYPE_PARAMETER,
+    EZ_BUILD_MODELS_OPTIONS_KEYS_LIST, VALID_DATATYPE,
+    VALID_DATATYPE_DICT, ALL_STR_PARAM, INVALID_KEY
+    
+)
 from .global_var import globals as gbl
 
 g = gbl.config_global_var()
@@ -104,7 +109,7 @@ def ez_augi(mode, outcome, train_file_path, options={}):
         if not isinstance(options, dict):
             return {
                     "success": False,
-                    "message": tr_api.VALID_DATATYPE_DICT.replace(
+                    "message": VALID_DATATYPE_DICT.replace(
                         "this", "options"),
                     }
         #Check for valid keys in the options dict
@@ -117,13 +122,13 @@ def ez_augi(mode, outcome, train_file_path, options={}):
         ):
             return {
                         "success": False,
-                        "message": tr_api.ALL_STR_PARAM
+                        "message": ALL_STR_PARAM
                     }
 
         for key in options:
-            if key not in tr_api.EZ_BUILD_MODELS_OPTIONS_KEYS_LIST:
+            if key not in EZ_BUILD_MODELS_OPTIONS_KEYS_LIST:
                 return {
-                    "success": False, "message": tr_api.INVALID_KEY % (key)}
+                    "success": False, "message": INVALID_KEY % (key)}
 
         if "features" in options:
             user_features_list = options["features"]
@@ -131,7 +136,7 @@ def ez_augi(mode, outcome, train_file_path, options={}):
             user_features_list = train_data.columns.tolist()
 
         if (not isinstance(user_features_list, list)):
-            return {"success": False, "message": tr_api.INVALID_DATATYPE_PARAMETER % ("features") + tr_api.VALID_DATATYPE % ("list")}
+            return {"success": False, "message": INVALID_DATATYPE_PARAMETER % ("features") + VALID_DATATYPE % ("list")}
 
         ## Cache g, g_did_mid, misc_data, misc_data_model, model_data and model_type in extra_info
         extra_info = dict()
@@ -154,5 +159,5 @@ def ez_augi(mode, outcome, train_file_path, options={}):
         #         "global_importance": global_importance_dict_to_be_returned}
     except Exception as e:
         print(e)
-        return {"success": False, "message": tr_api.INTERNAL_SERVER_ERROR}
+        return {"success": False, "message": INTERNAL_SERVER_ERROR}
 

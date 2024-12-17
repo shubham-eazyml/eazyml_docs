@@ -12,8 +12,22 @@ This method is well-suited for dynamic environments, enabling real-time updates
 and adaptability to new patterns or changes in data streams.
 """
 import os, sys
-import transparency_api as tr_api
-import transparency_app as tr_app
+from .transparency_api import (
+    INVALID_KEY, ALL_STR_PARAM,
+    EXPLANATION_SUCCESS, INTERNAL_SERVER_ERROR,
+    
+)
+from .transparency_app import (
+    EZ_IMAGE_EXPLAIN_OPTIONS_KEYS_LIST,
+    EZ_IMAGE_SUPPORTED_TYPES, EZ_IMAGE_PRED_INPUT_FORMATS,
+    EZ_IMAGE_DATA_PATH_FORMAT, EZ_IMAGE_XAI_STRATEGY,
+    EZ_IMAGE_SUPPORTED_MODEL_FORMATS,
+    EZ_IMAGE_EVALUATE_OPTIONS_KEYS_LIST,
+    EZ_IMAGE_SCORE_STRATEGY, EZ_IMAGE_ACTIVE_OPTIONS_KEYS_LIST,
+    EZ_IMAGE_AL_STRATEGY, EZ_IMAGE_ONLINE_OPTIONS_KEYS_LIST,
+    EZ_IMAGE_OL_STRATEGY, EZ_IMAGE_TR_STRATEGY
+)
+
 from .xai import exai_main_image
 import traceback
 
@@ -90,10 +104,10 @@ def ez_xai_image_explain(filename,
         # check if all the keys in options are expected.
         # There are no unexpected in options.
         for key in options:
-            if key not in tr_app.EZ_IMAGE_EXPLAIN_OPTIONS_KEYS_LIST:
+            if key not in EZ_IMAGE_EXPLAIN_OPTIONS_KEYS_LIST:
                 return {
                     "success": False,
-                    "message": tr_api.INVALID_KEY % (key)
+                    "message": INVALID_KEY % (key)
                 }
         
         if not (
@@ -103,7 +117,7 @@ def ez_xai_image_explain(filename,
         ):
             return {
                 "success": False,
-                "message": tr_api.ALL_STR_PARAM
+                "message": ALL_STR_PARAM
             }
         
         # Checking if the mandatory parameters are all as expected.
@@ -124,13 +138,13 @@ def ez_xai_image_explain(filename,
                 return return_response(str_)
         else:
             check = check_list_of_path_parameter(filename,
-                                                tr_app.EZ_IMAGE_SUPPORTED_TYPES,
+                                                EZ_IMAGE_SUPPORTED_TYPES,
                                                  len(predicted_filename),
                                                  "filename")
             if check is not None:
                 return check
             check = check_list_of_path_parameter(predicted_filename,
-                                            tr_app.EZ_IMAGE_PRED_INPUT_FORMATS,
+                                            EZ_IMAGE_PRED_INPUT_FORMATS,
                                                  len(filename),
                                                  "predicted_filename")
             if check is not None:
@@ -149,7 +163,7 @@ def ez_xai_image_explain(filename,
         if 'training_data_path' in options:
             training_data = options['training_data_path']
             check = check_path_parameter(training_data,
-                                         tr_app.EZ_IMAGE_DATA_PATH_FORMAT,
+                                         EZ_IMAGE_DATA_PATH_FORMAT,
                                          'training_data_path')
             if check is not None:
                 return check
@@ -157,7 +171,7 @@ def ez_xai_image_explain(filename,
         if 'score_strategy' in options:
             score_strategy = options['score_strategy']
             check = check_radio_parameter(score_strategy,
-                                          tr_app.EZ_IMAGE_SCORE_STRATEGY,
+                                          EZ_IMAGE_SCORE_STRATEGY,
                                           "score_strategy")
             if check is not None:
                 return check
@@ -165,7 +179,7 @@ def ez_xai_image_explain(filename,
         if 'xai_strategy' in options:
             xai_strategy = options['xai_strategy']
             check = check_radio_parameter(xai_strategy,
-                                          tr_app.EZ_IMAGE_XAI_STRATEGY,
+                                          EZ_IMAGE_XAI_STRATEGY,
                                           "xai_strategy")
             if check is not None:
                 return check
@@ -221,7 +235,7 @@ def ez_xai_image_explain(filename,
 
         return {
                 "success": True,
-                "message": tr_api.EXPLANATION_SUCCESS,
+                "message": EXPLANATION_SUCCESS,
                 "explanations": results,
             }
     
@@ -229,7 +243,7 @@ def ez_xai_image_explain(filename,
         traceback.print_exc()
         return {
             "success": False,
-            "message": tr_api.INTERNAL_SERVER_ERROR
+            "message": INTERNAL_SERVER_ERROR
         }
 
 
@@ -306,10 +320,10 @@ def ez_image_active_learning(filenames,
         options = ez_modify_options_seg_model(options)
         
         for key in options:
-            if key not in tr_app.EZ_IMAGE_ACTIVE_OPTIONS_KEYS_LIST:
+            if key not in EZ_IMAGE_ACTIVE_OPTIONS_KEYS_LIST:
                 return {
                     "success": False,
-                    "message": tr_api.INVALID_KEY % (key)
+                    "message": INVALID_KEY % (key)
                 }
             
         if (
@@ -319,7 +333,7 @@ def ez_image_active_learning(filenames,
         ):
             return {
                 "success": False,
-                "message": tr_api.ALL_STR_PARAM
+                "message": ALL_STR_PARAM
             }
 
         if len(filenames) != len(predicted_filenames):
@@ -331,13 +345,13 @@ def ez_image_active_learning(filenames,
             return return_response(str_)
 
         check = check_list_of_path_parameter(predicted_filenames,
-                                             tr_app.EZ_IMAGE_PRED_INPUT_FORMATS,
+                                             EZ_IMAGE_PRED_INPUT_FORMATS,
                                              len(filenames),
                                              "predicted_filenames")
         if check is not None:
             return check
         check = check_list_of_path_parameter(filenames,
-                                             tr_app.EZ_IMAGE_SUPPORTED_TYPES,
+                                             EZ_IMAGE_SUPPORTED_TYPES,
                                              len(filenames),
                                              "filenames")
         if check is not None:
@@ -361,7 +375,7 @@ def ez_image_active_learning(filenames,
         if 'training_data_path' in options:
             training_data = options['training_data_path']
             check = check_path_parameter(training_data,
-                                         tr_app.EZ_IMAGE_DATA_PATH_FORMAT,
+                                         EZ_IMAGE_DATA_PATH_FORMAT,
                                          "training_data_path")
             if check is not None:
                 return check
@@ -369,7 +383,7 @@ def ez_image_active_learning(filenames,
         if 'score_strategy' in options:
             score_strategy = options['score_strategy']
             check = check_radio_parameter(score_strategy,
-                                          tr_app.EZ_IMAGE_SCORE_STRATEGY,
+                                          EZ_IMAGE_SCORE_STRATEGY,
                                           "score_strategy")
             if check is not None:
                 return check
@@ -377,7 +391,7 @@ def ez_image_active_learning(filenames,
         if 'al_strategy' in options:
             al_strategy = options['al_strategy']
             check = check_radio_parameter(al_strategy,
-                                          tr_app.EZ_IMAGE_AL_STRATEGY,
+                                          EZ_IMAGE_AL_STRATEGY,
                                           "al_strategy")
             if check is not None:
                 return check
@@ -385,7 +399,7 @@ def ez_image_active_learning(filenames,
         if 'xai_strategy' in options:
             xai_strategy = options['xai_strategy']
             check = check_radio_parameter(xai_strategy,
-                                          tr_app.EZ_IMAGE_XAI_STRATEGY,
+                                          EZ_IMAGE_XAI_STRATEGY,
                                           "xai_strategy")
             if check is not None:
                 return check
@@ -426,7 +440,7 @@ def ez_image_active_learning(filenames,
 
         return {
                 "success": True,
-                "message": tr_api.EXPLANATION_SUCCESS,
+                "message": EXPLANATION_SUCCESS,
                 "explanations": results,
             }
     
@@ -434,7 +448,7 @@ def ez_image_active_learning(filenames,
         traceback.print_exc()
         return {
             "success": False,
-            "message": tr_api.INTERNAL_SERVER_ERROR
+            "message": INTERNAL_SERVER_ERROR
         }
 
 
@@ -543,10 +557,10 @@ def ez_image_online_learning(new_training_data_path,
         model = model_path
 
         for key in options:
-            if key not in tr_app.EZ_IMAGE_ONLINE_OPTIONS_KEYS_LIST:
+            if key not in EZ_IMAGE_ONLINE_OPTIONS_KEYS_LIST:
                 return {
                     "success": False,
-                    "message": tr_api.INVALID_KEY % (key)
+                    "message": INVALID_KEY % (key)
                 }
         if (
             not is_string(model_path)
@@ -554,17 +568,17 @@ def ez_image_online_learning(new_training_data_path,
         ):
             return {
                 "success": False,
-                "message": tr_api.ALL_STR_PARAM
+                "message": ALL_STR_PARAM
             }
 
         check = check_path_parameter(new_training_data_path, 
-                                    tr_app.EZ_IMAGE_DATA_PATH_FORMAT,
+                                    EZ_IMAGE_DATA_PATH_FORMAT,
                                     "new_training_data_path")
         if check is not None:
             return check
 
         check = check_path_parameter(model_path, 
-                                    tr_app.EZ_IMAGE_SUPPORTED_MODEL_FORMATS, 
+                                    EZ_IMAGE_SUPPORTED_MODEL_FORMATS, 
                                     "model_path")
         if check is not None:
             return check
@@ -582,7 +596,7 @@ def ez_image_online_learning(new_training_data_path,
         if 'training_data_path' in options:
             training_data = options['training_data_path']
             check = check_path_parameter(training_data,
-                                         tr_app.EZ_IMAGE_DATA_PATH_FORMAT,
+                                         EZ_IMAGE_DATA_PATH_FORMAT,
                                          "training_data_path")
             if check is not None:
                 return check
@@ -590,7 +604,7 @@ def ez_image_online_learning(new_training_data_path,
         if 'ol_strategy' in options:
             strategy = options['ol_strategy']
             check = check_radio_parameter(strategy,
-                                          tr_app.EZ_IMAGE_OL_STRATEGY,
+                                          EZ_IMAGE_OL_STRATEGY,
                                           "ol_strategy")
             if check is not None:
                 return check
@@ -626,7 +640,7 @@ def ez_image_online_learning(new_training_data_path,
         if 'tr_strategy' in options:
             tr_strategy = options['tr_strategy']
             check = check_radio_parameter(tr_strategy,
-                                          tr_app.EZ_IMAGE_TR_STRATEGY,
+                                          EZ_IMAGE_TR_STRATEGY,
                                           "tr_strategy")
             if check is not None:
                 return check
@@ -657,7 +671,7 @@ def ez_image_online_learning(new_training_data_path,
         if 'validation_data_path' in options:
             validation_data = options['validation_data_path']
             check = check_path_parameter(validation_data,
-                                         tr_app.EZ_IMAGE_DATA_PATH_FORMAT,
+                                         EZ_IMAGE_DATA_PATH_FORMAT,
                                          'validation_data_path')
             if check is not None:
                 return check
@@ -697,7 +711,7 @@ def ez_image_online_learning(new_training_data_path,
         traceback.print_exc()
         return {
             "success": False,
-            "message": tr_api.INTERNAL_SERVER_ERROR
+            "message": INTERNAL_SERVER_ERROR
         }
     
 
@@ -768,10 +782,10 @@ def ez_image_model_evaluate(validation_data_path,
 
         #Check for valid keys in the options dict
         for key in options:
-            if key not in tr_app.EZ_IMAGE_EVALUATE_OPTIONS_KEYS_LIST:
+            if key not in EZ_IMAGE_EVALUATE_OPTIONS_KEYS_LIST:
                 return {
                     "success": False,
-                    "message": tr_api.INVALID_KEY % (key)
+                    "message": INVALID_KEY % (key)
                 }
             
         val_data = validation_data_path
@@ -782,17 +796,17 @@ def ez_image_model_evaluate(validation_data_path,
         ):
             return {
                 "success": False,
-                "message": tr_api.ALL_STR_PARAM
+                "message": ALL_STR_PARAM
             }
 
         check = check_path_parameter(val_data, 
-                                    tr_app.EZ_IMAGE_DATA_PATH_FORMAT,
+                                    EZ_IMAGE_DATA_PATH_FORMAT,
                                     "validation_data_path")
         if check is not None:
             return check
 
         check = check_path_parameter(model_path, 
-                                    tr_app.EZ_IMAGE_SUPPORTED_MODEL_FORMATS, 
+                                    EZ_IMAGE_SUPPORTED_MODEL_FORMATS, 
                                     "model_path")
         if check is not None:
             return check
@@ -828,5 +842,5 @@ def ez_image_model_evaluate(validation_data_path,
         traceback.print_exc()
         return {
             "success": False,
-            "message": tr_api.INTERNAL_SERVER_ERROR
+            "message": INTERNAL_SERVER_ERROR
         }
