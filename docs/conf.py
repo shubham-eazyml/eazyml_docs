@@ -16,7 +16,7 @@ import sys
 # Add the `docs` directory to sys.path so Sphinx knows where to find the configuration
 sys.path.append(os.path.abspath('docs'))
 
-sys.path.append(os.path.abspath('packages/augi'))
+sys.path.append(os.path.abspath('../packages/augi'))
 
 
 
