@@ -48,7 +48,9 @@ autodoc_mock_imports = [
     'eazyml_augi.utility', 'global_var',
     'eazyml_cf.cfr_helper', 'cfr_helper',
     'flask', 'pandas', 'numpy', 'eazyml_xai_image',
-    'eazyml_xai_image.transparency_api'
+    'eazyml_xai_image.transparency_api',
+    'eazyml_dq.src', 'eazyml_model.src',
+    'transparency_api'
 ]
 sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
