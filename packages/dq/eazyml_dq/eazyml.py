@@ -1,10 +1,34 @@
 """
-This API allows you to perform an objective assessment of data quality –
-before proceeding with the exhaustive AI/ML exercise, it’s worthwhile to
-check if your data is good enough. EazyML’s functions – Augmented Intelligence
-and Overlap Factor – derive the metric from data to alert you of data
-shortfalls for various measures – from data and model drift to completeness
-and bias.
+The `ez_data_quality` function processes a dataset to assess its quality based on various parameters and returns the results in a structured response. Here's a summary of what it does:
+
+1. Parameter Validation:
+
+   - It checks that required parameters (`filename` and `outcome`) are provided, and if not, returns an error message.
+   - It also validates the `options` argument (if provided) to ensure it's a dictionary and contains valid keys.
+
+2. Configuration Setup:
+
+   - It initializes configuration options, including handling specific keys related to data quality (e.g., `data_quality_options`, `prediction_filename`).
+   - If certain keys are invalid or have incorrect data types, it returns an error.
+
+3. Data Processing:
+
+   Based on the options specified (e.g., `data_shape`, `data_emptiness`, `remove_outliers`, `data_balance`, `outcome_correlation`), it performs various checks or transformations on the data:
+
+   - `data_shape_quality`: Analyzes the shape of the data.
+   - `data_emptiness_quality`: Checks for missing values and applies imputation if specified.
+   - `data_outliers_quality`: Identifies and handles outliers.
+   - `data_balance_quality`: Assesses the balance of the outcome variable.
+   - `data_correlation_quality`: Analyzes the correlation of the data with the outcome variable.
+
+4. Alert Generation:
+
+   After evaluating the dataset, it generates quality alerts based on the results, flagging any issues related to the data.
+
+5. Response:
+
+   - It returns a structured response in JSON format indicating whether the data quality checks were successful or if there were any issues.
+   - If an error occurs during processing, it returns an exception.
 """
 from flask import Response
 
