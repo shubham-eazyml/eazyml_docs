@@ -13,11 +13,9 @@ users by offering features such as no-code interfaces, explainable AI,
 and integration capabilities with existing workflows.
 
 
-
 .. toctree::
-   :caption: NOTEBOOKS
+   :caption: packages
    :maxdepth: 2
    :hidden:
-   
-   EazyML Examples <notebooks/eazyml_notebook.rst>
 
+   Augmented Intelligence <packages/eazyml_augi.rst>

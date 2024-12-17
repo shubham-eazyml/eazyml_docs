@@ -17,11 +17,6 @@ import sys
 sys.path.append(os.path.abspath('docs'))
 
 sys.path.append(os.path.abspath('packages/augi'))
-sys.path.append(os.path.abspath('packages/xai'))
-sys.path.append(os.path.abspath('packages/xai_image'))
-sys.path.append(os.path.abspath('packages/cf'))
-sys.path.append(os.path.abspath('packages/dq'))
-sys.path.append(os.path.abspath('packages/modeling'))
 
 
 
