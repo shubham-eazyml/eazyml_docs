@@ -81,9 +81,6 @@ def ez_init_model(df, options):
                "success": false,
                "message": "Error message explaining the issue"
             }
-
-        **Raises Exception**:
-            - Captures and logs unexpected errors, returning a failure message.
     
     Example:
         .. code-block:: python
