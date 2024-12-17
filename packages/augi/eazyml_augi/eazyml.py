@@ -2,17 +2,13 @@
 EazyML Augmented Intelligence extract insights from Dataset with certain insights
 score which is calculated using coverage of that insights.
 """
-from .utility.transparency_api import (
+from .transparency_api import (
     INTERNAL_SERVER_ERROR, INVALID_DATATYPE_PARAMETER,
     EZ_BUILD_MODELS_OPTIONS_KEYS_LIST, VALID_DATATYPE,
     VALID_DATATYPE_DICT, ALL_STR_PARAM, INVALID_KEY
-    
 )
-from .global_var import globals as gbl
 
-g = gbl.config_global_var()
-
-from .utility.utils import get_df, build_model_for_api
+from .utils import get_df, build_model_for_api
 
 def ez_augi(mode, outcome, train_file_path, options={}):
     """
