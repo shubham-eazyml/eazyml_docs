@@ -12,7 +12,7 @@
 #
 import os
 import sys
-from unittest.mock import MagicMock
+# from unittest.mock import MagicMock
 
 # Add the `docs` directory to sys.path so Sphinx knows where to find the configuration
 sys.path.append(os.path.abspath('docs'))
@@ -29,13 +29,13 @@ sys.path.append(os.path.abspath('../packages/modeling'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'eazyml'
+project = 'EazyML'
 copyright = '2024, eazyml'
 author = 'eazyml'
 
 # The full version, including alpha/beta/rc tags
 version  = '0.1.0'
-release = '0.1.0'
+# release = '0.1.0'
 
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 os.environ["READTHEDOCS_LANGUAGE"] = "en"
@@ -44,7 +44,7 @@ os.environ["READTHEDOCS_VERSION_NAME"] = "0.1.0"
 
 # Mock missing modules or dependencies
 autodoc_mock_imports = [
-    'flask', 'pandas', 'numpy',
+    'flask', 'pandas', 'numpy', 'matplotlib',
     'eazyml_augi.transparency_api',
     'eazyml_augi.utils',
     'eazyml_xai_image.transparency_api',
@@ -59,7 +59,7 @@ autodoc_mock_imports = [
     'eazyml_model.src', 'eazyml_model.src.build_model',
     'eazyml_model.src.utils',
 ]
-sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
+# sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
 # Optional: Build Documentation Without Importing Modules: 
 autodoc_default_options = {
