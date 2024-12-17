@@ -44,17 +44,17 @@ os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 
 # Mock missing modules or dependencies
 autodoc_mock_imports = [
-    'utility', 'eazyml', 'eazyml_augi',
+    'utility', 'eazyml_augi',
     'eazyml_augi.utility', 'global_var',
     'eazyml_cf.cfr_helper', 'cfr_helper',
     'flask', 'pandas', 'numpy', 'eazyml_xai_image',
     'eazyml_xai_image.transparency_api',
     'eazyml_dq.src', 'eazyml_model.src',
-    'transparency_api', 'eazyml_model.eazyml',
+    'transparency_api',
     'eazyml_dq.src.utils', 'eazyml_model.src.utils',
     'eazyml_xai', 'eazyml_xai.transparency_api',
     'eazyml_dq.src.main', 'eazyml_model.src.build_model',
-    'eazyml_model.src.test_model'
+    'eazyml_model.src.test_model', 'eazyml_model.src.utils.utility_libs'
 ]
 sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
