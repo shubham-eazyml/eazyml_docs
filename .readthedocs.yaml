@@ -11,6 +11,11 @@ build:
   tools:
     python: "3.10"
   commands:
+    - python -mvirtualenv $READTHEDOCS_VIRTUALENV_PATH
+    - python -m pip install --upgrade --no-cache-dir pip setuptools
+    - python -m pip install --upgrade --no-cache-dir sphinx 
+    - python -m pip install --exists-action=w --no-cache-dir -r docs/requirements.txt
+    - python -m pip install --upgrade --upgrade-strategy only-if-needed --no-cache-dir .
     - python -m sphinx -T -W --keep-going -b html -d _build/doctrees -D language=en docs html
 
 # Optionally declare the Python requirements required to build your docs
@@ -21,6 +26,7 @@ python:
       path: .
 
 sphinx:
+  builder: html
   configuration: docs/conf.py
   fail_on_warning: true
 
