@@ -1,9 +1,0 @@
-Augmented Intelligence
-----------------------
-
-This folder contains a number of notebooks that demonstrate the
-fundamentals of augmented intelligence for classification, regression and more.
-
-The following notebooks are available:
-
-1. `IRIS AUGI <../static/examples/augi/iris/AUGI_Client.html>`_

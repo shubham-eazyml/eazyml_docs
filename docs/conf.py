@@ -12,6 +12,10 @@
 #
 import os
 import sys
+
+# Add the `docs` directory to sys.path so Sphinx knows where to find the configuration
+sys.path.append(os.path.abspath('docs'))
+
 # sys.path.append(os.path.abspath('../packages/augi'))
 # sys.path.append(os.path.abspath('../packages/xai'))
 # sys.path.append(os.path.abspath('../packages/xai_image'))
@@ -95,3 +99,13 @@ autodoc_mock_imports = []
 html_show_copyright = True
 
 html_show_sphinx = True
+
+# -- Build path override for Read the Docs -----------------------------------
+
+# Force Sphinx to look in the `docs` directory for source files
+if os.environ.get("READTHEDOCS"):
+    # Redirect Sphinx to build from the "docs" directory
+    os.environ["SPHINXBUILD"] = "python -m sphinx -T -W --keep-going -b html -d _build/doctrees -D language=en docs $READTHEDOCS_OUTPUT/html"
+
+# Mock imports for external dependencies (if needed)
+autodoc_mock_imports = []
