@@ -35,6 +35,19 @@ os.environ["READTHEDOCS_LANGUAGE"] = "en"
 os.environ["READTHEDOCS_VERSION"] = "latest"
 os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 
+# Mock missing modules or dependencies
+autodoc_mock_imports = ['utility', 'eazyml', 'eazyml_augi']
+
+# Optional: Build Documentation Without Importing Modules: 
+autodoc_default_options = {
+    'members': True,
+    'undoc-members': True,
+    'show-inheritance': True,
+    'ignore-module-all': True
+}
+
+# Ensure autodoc Doesn’t Raise Errors
+suppress_warnings = ['autodoc.import']
 
 # html_js_files = [
 #      ("readthedocs.js", {"defer": "defer"}),
