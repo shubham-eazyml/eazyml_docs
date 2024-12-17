@@ -11,10 +11,9 @@ as data becomes available, rather than using a fixed, pre-existing dataset.
 This method is well-suited for dynamic environments, enabling real-time updates
 and adaptability to new patterns or changes in data streams.
 """
-import os
-from . import transparency_api as tr_api
-from . import transparency_app as tr_app
-from .xai import exai
+import os, sys
+import transparency_api as tr_api
+import transparency_app as tr_app
 from .xai import exai_main_image
 import traceback
 

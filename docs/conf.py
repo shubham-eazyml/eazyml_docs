@@ -44,12 +44,15 @@ os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 
 # Mock missing modules or dependencies
 autodoc_mock_imports = [
+    'flask', 'pandas', 'numpy',
     'utility', 'eazyml_augi',
     'eazyml_augi.utility', 'global_var',
-    'eazyml_cf.cfr_helper',
-    'flask', 'pandas', 'numpy', 'eazyml_xai_image',
     'eazyml_xai_image.transparency_api',
-    'eazyml_xai', 'eazyml_xai.transparency_api',
+    'eazyml_xai_image.transparency_app',
+    'eazyml_xai_image.xai',
+    'eazyml_xai_image.helper',
+    'eazyml_xai.transparency_api', 'eazyml_xai.xai',
+    'eazyml_cf.cfr_helper',
     'eazyml_dq.src.utils', 'eazyml_dq.src', 
     'eazyml_dq.src.main', 
     'eazyml_model.src.test_model', 'eazyml_model.src.utils.utility_libs',
