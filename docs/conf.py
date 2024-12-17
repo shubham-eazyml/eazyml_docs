@@ -34,12 +34,12 @@ copyright = '2024, eazyml'
 author = 'eazyml'
 
 # The full version, including alpha/beta/rc tags
-version  = '0.1'
-release = '0.1.1'
+version  = '0.1.0'
+release = '0.1.0'
 
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 os.environ["READTHEDOCS_LANGUAGE"] = "en"
-os.environ["READTHEDOCS_VERSION"] = "latest"
+os.environ["READTHEDOCS_VERSION"] = "0.1.0"
 os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 
 # Mock missing modules or dependencies
