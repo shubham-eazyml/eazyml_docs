@@ -103,7 +103,7 @@ intersphinx_disabled_domains = ["std"]
 templates_path = ['_templates']
 
 # -- Options for EPUB output
-# epub_show_urls = "footnote"
+epub_show_urls = "footnote"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -116,6 +116,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = 'sphinx_rtd_theme'
+
+html_theme_options = {
+    'display_version': False,  # Hide the version badge
+}
 
 # Hide view page source link at top
 html_show_sourcelink = False
