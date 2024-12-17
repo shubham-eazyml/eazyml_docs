@@ -12,6 +12,7 @@
 #
 import os
 import sys
+from unittest.mock import MagicMock
 
 # Add the `docs` directory to sys.path so Sphinx knows where to find the configuration
 sys.path.append(os.path.abspath('docs'))
@@ -40,6 +41,7 @@ autodoc_mock_imports = [
     'utility', 'eazyml', 'eazyml_augi',
     'eazyml_augi.utility', 'global_var'
 ]
+sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
 # Optional: Build Documentation Without Importing Modules: 
 autodoc_default_options = {
