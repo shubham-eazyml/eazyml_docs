@@ -17,7 +17,7 @@ dependencies = [
 [tool.sphinx]
 # Optional Sphinx-specific settings
 source-dir = "docs"
-build-dir = "docs/build"
+build-dir = "build"
 builder = "html"
 
 [tool.black]
