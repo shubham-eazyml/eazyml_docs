@@ -21,7 +21,7 @@ where = ["docs"]
 # Optional Sphinx-specific settings
 source-dir = "docs"
 build-dir = "docs/_build"
-builder = "html"
+builder = "docs/_build/html"
 
 [tool.black]
 line-length = 88
