@@ -18,6 +18,7 @@ and integration capabilities with existing workflows.
    :maxdepth: 2
    :hidden:
 
+   Explainable AI <packages/eazyml_xai.rst>
    Augmented Intelligence <packages/eazyml_augi.rst>
    Image Explainable AI <packages/eazyml_xai_image.rst>
    Counterfactual <packages/eazyml_cf.rst>

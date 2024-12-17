@@ -50,9 +50,11 @@ autodoc_mock_imports = [
     'flask', 'pandas', 'numpy', 'eazyml_xai_image',
     'eazyml_xai_image.transparency_api',
     'eazyml_dq.src', 'eazyml_model.src',
-    'transparency_api', 'eazyml_dq.src',
+    'transparency_api', 'eazyml_model.eazyml',
     'eazyml_dq.src.utils', 'eazyml_model.src.utils',
-    'eazyml_xai', 'eazyml_xai.transparency_api'
+    'eazyml_xai', 'eazyml_xai.transparency_api',
+    'eazyml_dq.src.main', 'eazyml_model.src.build_model',
+    'eazyml_model.src.test_model'
 ]
 sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
