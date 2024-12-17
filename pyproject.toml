@@ -20,7 +20,7 @@ where = ["docs"]
 [tool.sphinx]
 # Optional Sphinx-specific settings
 source-dir = "docs"
-build-dir = "_build"
+build-dir = "docs/_build"
 builder = "html"
 
 [tool.black]
