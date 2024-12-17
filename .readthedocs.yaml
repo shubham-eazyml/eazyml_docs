@@ -10,12 +10,6 @@ build:
   os: "ubuntu-24.04"
   tools:
     python: "3.10"
-    pip: "latest"   # Ensure pip is the latest version
-
-# Custom build commands
-commands:
-  # Override the default Sphinx command to set custom paths
-  - python -m sphinx -T -W --keep-going -b html -d docs/_build/doctrees docs docs/_build/html
 
 
 # Optionally declare the Python requirements required to build your docs
@@ -31,8 +25,4 @@ sphinx:
   builder: html
 
 
-# User-defined build outputs
-output:
-  # Keep specific directories and outputs from your build
-  - path: docs/_build/html
-    type: html
+
