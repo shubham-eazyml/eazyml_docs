@@ -40,7 +40,7 @@ release = '0.1.0'
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
 os.environ["READTHEDOCS_LANGUAGE"] = "en"
 os.environ["READTHEDOCS_VERSION"] = "0.1.0"
-os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
+os.environ["READTHEDOCS_VERSION_NAME"] = "0.1.0"
 
 # Mock missing modules or dependencies
 autodoc_mock_imports = [
@@ -103,7 +103,7 @@ intersphinx_disabled_domains = ["std"]
 templates_path = ['_templates']
 
 # -- Options for EPUB output
-epub_show_urls = "footnote"
+# epub_show_urls = "footnote"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
