@@ -31,15 +31,15 @@ author = 'eazyml'
 version  = '0.1'
 release = '0.1.1'
 
-html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
-os.environ["READTHEDOCS_LANGUAGE"] = "en"
-os.environ["READTHEDOCS_VERSION"] = "latest"
-os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
+# html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "/")
+# os.environ["READTHEDOCS_LANGUAGE"] = "en"
+# os.environ["READTHEDOCS_VERSION"] = "latest"
+# os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 
 
-html_js_files = [
-     ("readthedocs.js", {"defer": "defer"}),
-]
+# html_js_files = [
+#      ("readthedocs.js", {"defer": "defer"}),
+# ]
 
 # -- General configuration ---------------------------------------------------
 
