@@ -17,6 +17,8 @@ dependencies = [
 [tool.sphinx]
 # Optional Sphinx-specific settings
 source-dir = "docs"
+build-dir = "docs/build"
+builder = "html"
 
 [tool.black]
 line-length = 88
