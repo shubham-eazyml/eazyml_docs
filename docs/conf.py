@@ -46,7 +46,9 @@ os.environ["READTHEDOCS_VERSION_NAME"] = "latest"
 autodoc_mock_imports = [
     'utility', 'eazyml', 'eazyml_augi',
     'eazyml_augi.utility', 'global_var',
-    'eazyml_cf.cfr_helper', 'cfr_helper'
+    'eazyml_cf.cfr_helper', 'cfr_helper',
+    'flask', 'pandas', 'numpy', 'eazyml_xai_image',
+    'eazyml_xai_image.transparency_api'
 ]
 sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
