@@ -56,32 +56,6 @@ def ez_init_model(df, options):
             - `success` (`bool`): Indicates if the model has been successful trained.
             - `message` (`str`): Describes the success or failure of the operation.
 
-        **On Success**:  
-        A JSON response with
-        
-        .. code-block:: json
-
-            {
-               "success": true,
-               "message": "Model built successfully",
-               "model_performance": {...},
-               "global_importance": {
-                   "data": [...],
-                   "columns": [...]
-               },
-               "extra_info": "encrypted_data"
-           }
-
-        **On Failure**:  
-        A JSON response with
-        
-        .. code-block:: json
-
-            {
-               "success": false,
-               "message": "Error message explaining the issue"
-            }
-    
     Example:
         .. code-block:: python
 
