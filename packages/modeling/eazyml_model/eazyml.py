@@ -418,11 +418,9 @@ def ez_predict(test_data, options):
         - **tuple**:
             A tuple consisting of:
                 - dict or pandas.DataFrame : If successful, returns the prediction results in a DataFrame. 
-                In case of failure, returns a dictionary with the keys:
-                    - "success" : bool
-                        Indicates if the operation was successful.
-                    - "message" : str
-                        Contains an error or informational message.
+                - In case of failure, returns a dictionary with the keys:
+                    - "success" (`bool`) : Indicates if the operation was successful.
+                    - "message" (`str`) : Contains an error or informational message.
                 - int : HTTP status code (200 for success, 422 for errors).
     """
 #     try:
