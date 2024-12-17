@@ -1,3 +1,6 @@
+"""
+This API allows users to build machine learning models.
+"""
 import os, sys
 import json
 import traceback
@@ -31,6 +34,75 @@ warnings.filterwarnings("ignore")
 convert_json = partial(json.dumps, indent=4, sort_keys=True, default=str)
 
 def ez_init_model(df, options):
+    """
+    Initialize and build a predictive model based on the provided dataset and options.
+
+    Parameters :
+        - **df** (`DataFrame`): A pandas DataFrame containing the dataset for model initialization.
+        - **options** (`dict`): A dictionary of options to configure the model initialization process. Supported keys include:
+            - **model_type** (`str`): Type of model to build. Options are "predictive", "timeseries", or "augmented intelligence".
+            - **accelerate** (`str`): Whether to accelerate the model-building process. Accepts "yes" or "no".
+            - **date_time_column** (`str`): Column name representing date/time values.
+            - **remove_dependent** (`str`): Command to remove dependent predictors. Accepts "yes" or "no".
+            - **derive_numeric** (`str`): Whether to derive numeric predictors. Accepts "yes" or "no".
+            - **derive_text** (`str`): Whether to derive text-based predictors. Accepts "yes" or "no".
+            - **phrases** (`dict`): Dictionary to configure text extraction based on predefined phrases.
+            - **text_types** (`dict`): Dictionary specifying text types to derive (e.g., "sentiments").
+            - **expressions** (`list`): List of expressions for numeric predictor derivation.
+            - **outcome** (`str`): Target variable for the model.
+
+    Returns :
+        - **Dictionary with Fields**:
+            - `success` (`bool`): Indicates if the model has been successful trained.
+            - `message` (`str`): Describes the success or failure of the operation.
+
+        **On Success**:  
+        A JSON response with
+        
+        .. code-block:: json
+
+            {
+               "success": true,
+               "message": "Model built successfully",
+               "model_performance": {...},
+               "global_importance": {
+                   "data": [...],
+                   "columns": [...]
+               },
+               "extra_info": "encrypted_data"
+           }
+
+        **On Failure**:  
+        A JSON response with
+        
+        .. code-block:: json
+
+            {
+               "success": false,
+               "message": "Error message explaining the issue"
+            }
+
+        **Raises Exception**:
+            - Captures and logs unexpected errors, returning a failure message.
+    
+    Example:
+        .. code-block:: python
+
+            ez_init_model(
+                df = pd.DataFrame({...}),
+                options = {
+                        "model_type": "predictive",
+                        "accelerate": "yes",
+                        "outcome": "target",
+                        "remove_dependent": "no",
+                        "derive_numeric": "yes",
+                        "derive_text": "no",
+                        "phrases": {"*": []},
+                        "text_types": {"*": ["sentiments"]},
+                        "expressions": []
+                    }
+            )
+    """
     try:
         if not isinstance(options, dict):
             return {"success": False, "message": tr_api.VALID_DATATYPE_DICT.replace("this", "options")}, 422
@@ -359,39 +431,28 @@ def ez_init_model(df, options):
         return convert_json({"success": False, "message": tr_api.INTERNAL_SERVER_ERROR}), 500
 
 
-def ez_predict(test_data, options, custom=False):
+def ez_predict(test_data, options):
     """
-    Receives the test dataframe in multipart form data format under the key
-    "test_dataframe" and a JSON under the key "model_params"
-    which should have the keys model_id and model_name in it.
+    Perform prediction on the given test data based
+    on model options and validate the input dataset.
+
+    Parameters :
+        - **test_data** (`DataFrame`): The test dataset to be evaluated. It must have consistent features with the trained model.
+        - **options** (`dict`): A dictionary of options to configure the model initialization process. Supported keys include:
+            - **extra_info** (`dict`): Contains encrypted or unencrypted details about the model and environment.
+            - **model** (`str`): Specifies the model to be used for prediction. If not provided, the default model from `extra_info` is used.
+            - **outcome** (`str`): Target variable for the model.
 
     Returns :
-        - **Dictionary with Fields**:
-            - `success` (`bool`): Indicates if the explanation generation was successful.
-            - `message` (`str`): Describes the success or failure of the operation.
-            - `predictions` (`df`): A Pandas Dataframe in JSON format. The JSON contains two keys
-                - `data` : the data in list of list format
-                - `columns` : The columns of the dataframe in list format
-
-        **On Success**:  
-        A JSON response with
-        
-        .. code-block:: json
-
-            {
-                "success": true,
-                "message": "Explanation generated successfully"
-            }
-
-        **On Failure**:  
-        A JSON response with
-        
-        .. code-block:: json
-
-            {
-                "success": false,
-                "message": "Error message"
-            }
+        - **tuple**:
+            A tuple consisting of:
+                - dict or pandas.DataFrame : If successful, returns the prediction results in a DataFrame. 
+                In case of failure, returns a dictionary with the keys:
+                    - "success" : bool
+                        Indicates if the operation was successful.
+                    - "message" : str
+                        Contains an error or informational message.
+                - int : HTTP status code (200 for success, 422 for errors).
     """
 #     try:
     global g
