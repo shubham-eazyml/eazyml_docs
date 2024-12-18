@@ -25,3 +25,10 @@ and integration capabilities with existing workflows.
    Data Quality <packages/eazyml_dq.rst>
    Modeling <packages/eazyml_model.rst>
 
+
+.. toctree::
+   :caption: NOTEBOOKS
+   :maxdepth: 2
+   :hidden:
+   
+   EazyML Examples <notebooks/eazyml_notebook.rst>
