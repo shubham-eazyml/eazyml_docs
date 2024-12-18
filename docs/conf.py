@@ -119,7 +119,7 @@ html_theme = 'sphinx_rtd_theme'
 
 html_context = {
     "display_github": True,  # Enable "Edit on GitHub"
-    "github_user": "shubham-eazyml",  # GitHub username
+    "github_user": "shubham",  # GitHub username
     "github_repo": "eazyml_docs",       # Repository name
     "github_version": "main",             # Branch name
     "conf_py_path": "/docs/",             # Path to the docs folder in your repository
