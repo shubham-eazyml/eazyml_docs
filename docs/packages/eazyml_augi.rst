@@ -1,7 +1,7 @@
 Augmented Intelligence
 ----------------------
 
-.. automodule:: eazyml_augi.eazyml
+.. automodule:: eazyml_augi.client
    :members:
    :undoc-members:
 

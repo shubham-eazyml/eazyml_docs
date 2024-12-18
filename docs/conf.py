@@ -55,9 +55,9 @@ autodoc_mock_imports = [
     'eazyml_cf.cfr_helper',
     'eazyml_dq.src.utils', 'eazyml_dq.src', 
     'eazyml_dq.src.main', 
-    'eazyml_model.src.test_model', 'eazyml_model.src.utils.utility_libs',
-    'eazyml_model.src', 'eazyml_model.src.build_model',
-    'eazyml_model.src.utils',
+    'eazyml.src.test_model', 'eazyml.src.utils.utility_libs',
+    'eazyml.src', 'eazyml.src.build_model',
+    'eazyml.src.utils',
 ]
 sys.modules.update((mod_name, MagicMock()) for mod_name in autodoc_mock_imports)
 
@@ -82,13 +82,13 @@ suppress_warnings = ['autodoc.import']
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    # "sphinx.ext.duration",
-    # "sphinx.ext.doctest",
-    # "sphinx.ext.todo",
-    # "sphinx.ext.viewcode",
+    "sphinx.ext.duration",
+    "sphinx.ext.doctest",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
     "sphinx.ext.autodoc",
-    # "sphinx.ext.autosummary",
-    # "sphinx.ext.intersphinx",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
     # "myst_parser"
 ]
 
@@ -103,7 +103,7 @@ intersphinx_disabled_domains = ["std"]
 templates_path = ['_templates']
 
 # -- Options for EPUB output
-epub_show_urls = "footnote"
+# epub_show_urls = "footnote"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -124,8 +124,6 @@ html_show_sourcelink = False
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
-autodoc_mock_imports = []
 
 html_show_copyright = True
 

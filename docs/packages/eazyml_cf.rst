@@ -1,6 +1,6 @@
 Counterfactual
 --------------
 
-.. automodule:: eazyml_cf.eazyml
+.. automodule:: eazyml_cf.client
    :members:
    :undoc-members:

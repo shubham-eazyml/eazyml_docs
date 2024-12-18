@@ -1,6 +1,6 @@
 EazyML Modeling
 ---------------
 
-.. automodule:: eazyml_model.eazyml
+.. automodule:: eazyml.client
    :members:
    :undoc-members:
