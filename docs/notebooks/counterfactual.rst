@@ -7,4 +7,4 @@ variables that shift outcomes from unfavorable to favorable.
 
 The following notebooks are available:
 
-1. `Airline passengers satisfaction <../static/examples/cf/airline_passengers_satisfaction/demo_airline.html>`_
+1. `Airline passengers satisfaction <../_static/examples/cf/airline_passengers_satisfaction/demo_airline.html>`_

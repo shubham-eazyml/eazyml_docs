@@ -6,4 +6,4 @@ fundamentals for a model's prediction.
 
 The following notebooks are available:
 
-1. `IRIS XAI <../static/examples/xai/iris/Explain_Client.html>`_
+1. `IRIS XAI <../_static/examples/xai/iris/Explain_Client.html>`_
