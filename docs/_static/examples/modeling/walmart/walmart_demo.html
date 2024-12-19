@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Demo - Airline dataset</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>walmart_demo</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14573,22 +14573,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>eazyml-cf
-</pre></div>
-
-     </div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="EazyML-Modeling:-Walmart-Regression">EazyML Modeling: Walmart Regression<a class="anchor-link" href="#EazyML-Modeling:-Walmart-Regression">&#182;</a></h1>
 </div>
 </div>
 </div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14597,18 +14592,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">imp</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="kn">from</span> <span class="nn">eazyml_cf</span> <span class="kn">import</span> <span class="p">(</span><span class="n">sk_feature_selection</span><span class="p">,</span>
-                       <span class="n">sk_model_building</span><span class="p">,</span>
-                       <span class="n">ez_cf_inference</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>eazyml
 </pre></div>
 
      </div>
@@ -14623,7 +14607,47 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Airline-Satisfaction-dataset">Airline Satisfaction dataset<a class="anchor-link" href="#Airline-Satisfaction-dataset">&#182;</a></h1>
+<h2 id="Define-Imports">Define Imports<a class="anchor-link" href="#Define-Imports">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">eazyml</span> <span class="k">as</span> <span class="nn">ez</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="1.-Define-Dataset-Files,-Outcome-Variable-and-Train-model">1. Define Dataset Files, Outcome Variable and Train model<a class="anchor-link" href="#1.-Define-Dataset-Files,-Outcome-Variable-and-Train-model">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="1.1-Define-train-dataset-and-other-model-parameters">1.1 Define train dataset and other model parameters<a class="anchor-link" href="#1.1-Define-train-dataset-and-other-model-parameters">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14635,42 +14659,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_file</span> <span class="o">=</span> <span class="s2">&quot;Airline Passengers Satisfaction - Train Data.xlsx&quot;</span>
-<span class="n">test_file</span> <span class="o">=</span> <span class="s2">&quot;Airline Passengers Satisfaction - Test Data.xlsx&quot;</span>
-<span class="n">outcome</span> <span class="o">=</span> <span class="s2">&quot;satisfaction&quot;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">train_file</span><span class="p">)</span>
-<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">test_file</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reg_file_path</span> <span class="o">=</span> <span class="s2">&quot;Walmart_train_data.csv&quot;</span>
+<span class="n">reg_outcome</span> <span class="o">=</span> <span class="s2">&quot;Weekly_Sales&quot;</span>
+<span class="n">df_reg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">reg_file_path</span><span class="p">)</span>
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;outcome&quot;</span><span class="p">:</span><span class="n">reg_outcome</span><span class="p">,</span> <span class="s1">&#39;model_type&#39;</span><span class="p">:</span> <span class="s1">&#39;predictive&#39;</span><span class="p">}</span>
 </pre></div>
 
      </div>
@@ -14685,7 +14677,62 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Feature-selection">Feature selection<a class="anchor-link" href="#Feature-selection">&#182;</a></h3>
+<h3 id="1.2-Train-model">1.2 Train model<a class="anchor-link" href="#1.2-Train-model">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resp_reg</span><span class="p">,</span> <span class="n">status_code</span> <span class="o">=</span> <span class="n">ez</span><span class="o">.</span><span class="n">ez_init_model</span><span class="p">(</span><span class="n">df_reg</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="1.3-Show-model-performance">1.3 Show model performance<a class="anchor-link" href="#1.3-Show-model-performance">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">performance_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">resp_reg</span><span class="p">[</span><span class="s1">&#39;model_performance&#39;</span><span class="p">][</span><span class="s1">&#39;columns&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">resp_reg</span><span class="p">[</span><span class="s1">&#39;model_performance&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+<span class="n">ez</span><span class="o">.</span><span class="n">ez_display_df</span><span class="p">(</span><span class="n">performance_df</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="2-Define-test-dataset-and-predict-on-that-dataset">2 Define test dataset and predict on that dataset<a class="anchor-link" href="#2-Define-test-dataset-and-predict-on-that-dataset">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14697,8 +14744,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">config_fs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">config_fs</span><span class="p">[</span><span class="s1">&#39;discard_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Unnamed: 0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reg_extra_info</span> <span class="o">=</span> <span class="n">resp_reg</span><span class="p">[</span><span class="s2">&quot;extra_info&quot;</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14706,6 +14752,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="2.1-Define-test-dataset">2.1 Define test dataset<a class="anchor-link" href="#2.1-Define-test-dataset">&#182;</a></h3>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14714,23 +14771,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">selected_features</span> <span class="o">=</span> <span class="n">sk_feature_selection</span><span class="p">(</span><span class="n">train_file</span><span class="p">,</span> <span class="n">outcome</span><span class="p">,</span> <span class="n">config_fs</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;selected_features : &quot;</span><span class="p">,</span> <span class="n">selected_features</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reg_test_file_path</span> <span class="o">=</span> <span class="s2">&quot;walmart_train_data.csv&quot;</span>
+<span class="n">reg_test_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">reg_test_file_path</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14745,7 +14787,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Model-building">Model building<a class="anchor-link" href="#Model-building">&#182;</a></h3>
+<h3 id="2.2-Predict-on-test-datas">2.2 Predict on test datas<a class="anchor-link" href="#2.2-Predict-on-test-datas">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14754,30 +14796,11 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unfavorable_outcome</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="n">config_modelling</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">config_modelling</span><span class="p">[</span><span class="s1">&#39;unfavorable_outcome&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unfavorable_outcome</span>
-<span class="n">config_modelling</span><span class="p">[</span><span class="s1">&#39;sklearn_classifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Gradient Boosting&#39;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_dict</span> <span class="o">=</span> <span class="n">sk_model_building</span><span class="p">(</span><span class="n">train_file</span><span class="p">,</span> <span class="n">test_file</span><span class="p">,</span> <span class="n">outcome</span><span class="p">,</span> <span class="n">selected_features</span><span class="p">,</span> <span class="n">config_modelling</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;extra_info&quot;</span><span class="p">:</span><span class="n">reg_extra_info</span><span class="p">,</span> <span class="s2">&quot;outcome&quot;</span><span class="p">:</span><span class="n">reg_outcome</span><span class="p">}</span>
+<span class="n">reg_pred_df</span><span class="p">,</span> <span class="n">status_code</span> <span class="o">=</span> <span class="n">ez</span><span class="o">.</span><span class="n">ez_predict</span><span class="p">(</span><span class="n">reg_test_data</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14793,101 +14816,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_dict</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Counterfactual-inference">Counterfactual inference<a class="anchor-link" href="#Counterfactual-inference">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># configurable parameters</span>
-<span class="n">config_infer</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;unfavorable_outcome&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unfavorable_outcome</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;lower_quantile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.01</span>            <span class="c1"># minimum percentile</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;upper_quantile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.99</span>            <span class="c1"># maximum percentile</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40</span>                           <span class="c1"># percentage of the total range to be considered for vicinity</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>                            <span class="c1"># degree of the polynomial</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10000</span>
-
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;tolerable_error_threshold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;invariant_features&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">,</span> <span class="s1">&#39;Customer Type&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Type of Travel&#39;</span><span class="p">,</span> <span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="s1">&#39;Flight Distance&#39;</span><span class="p">]</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;continuous_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;categorical_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;global_range_for_continuous&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;best_among_local_optimums&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;no_of_random_initial_seed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">config_infer</span><span class="p">[</span><span class="s1">&#39;plot_optimization_flag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_record_idx</span> <span class="o">=</span> <span class="mi">12</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">ez_cf_inference</span><span class="p">(</span><span class="n">train_file</span><span class="p">,</span> <span class="n">test_file</span><span class="p">,</span> <span class="n">outcome</span><span class="p">,</span> <span class="n">config_infer</span><span class="p">,</span> 
-                        <span class="n">selected_features</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">,</span> <span class="n">test_record_idx</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ez</span><span class="o">.</span><span class="n">ez_display_df</span><span class="p">(</span><span class="n">reg_pred_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 
      </div>

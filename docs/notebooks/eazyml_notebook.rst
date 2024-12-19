@@ -15,6 +15,8 @@ sample apps, and resources for testing out EazyML apis.
    Explainable AI <xai.rst>
    Image Explainable AI <image_xai.rst>
    Counterfactual <counterfactual.rst>
+   Data Quality <dq.rst>
+   Modeling <modeling.rst>
 
 
 

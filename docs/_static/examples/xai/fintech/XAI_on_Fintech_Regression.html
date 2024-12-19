@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AUGI_Client</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>XAI_on_Fintech_Regression</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14573,7 +14573,29 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="EazyML-Modelling-Template:-Customized-for-Lender-(Risk-Assessment)">EazyML Modelling Template: Customized for Lender (Risk Assessment)<a class="anchor-link" href="#EazyML-Modelling-Template:-Customized-for-Lender-(Risk-Assessment)">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Define-Imports">Define Imports<a class="anchor-link" href="#Define-Imports">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14581,7 +14603,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>eazyml-augi
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">eazyml</span><span class="o">-</span><span class="n">xai</span>
 </pre></div>
 
      </div>
@@ -14594,16 +14616,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">eazyml_augi</span> <span class="kn">import</span> <span class="n">ez_augi</span>
-
-<span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;classification&#39;</span>
-<span class="n">outcome</span> <span class="o">=</span> <span class="s1">&#39;species&#39;</span>
-<span class="n">train_file_path</span> <span class="o">=</span> <span class="s1">&#39;IRIS.csv&#39;</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">ez_augi</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">outcome</span><span class="p">,</span> <span class="n">train_file_path</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">eazyml_xai</span> <span class="k">as</span> <span class="nn">ez</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 </pre></div>
 
      </div>
@@ -14611,6 +14632,321 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="1.-Define-ETL'ed-Dataset-Files-and-Outcome-Variable">1. Define ETL'ed Dataset Files and Outcome Variable<a class="anchor-link" href="#1.-Define-ETL'ed-Dataset-Files-and-Outcome-Variable">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Names of the files that will be used by EazyML APIs</span>
+<span class="n">train_file_path</span> <span class="o">=</span> <span class="s1">&#39;Fintech_Train.xlsx&#39;</span>
+<span class="n">test_file_path</span>  <span class="o">=</span> <span class="s1">&#39;Fintech_Test.xlsx&#39;</span>
+
+<span class="c1"># The column name for outcome of interest</span>
+<span class="n">outcome</span> <span class="o">=</span> <span class="s1">&#39;Content Score&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="2.-Define-Mode,-Data-Type-and-List-of-Selected-Features">2. Define Mode, Data Type and List of Selected Features<a class="anchor-link" href="#2.-Define-Mode,-Data-Type-and-List-of-Selected-Features">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;regression&#39;</span>
+
+<span class="n">variable_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Average Daily Balance&#39;</span><span class="p">,</span> <span class="s1">&#39;Nsf Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Sum&#39;</span><span class="p">,</span> <span class="s1">&#39;Years In Business&#39;</span><span class="p">,</span> <span class="s1">&#39;Owner Credit Score&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Deposit Count 30&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Count 60&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Count 90&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Sum 30 MA&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Sum 60 MA&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Sum 90 MA&#39;</span><span class="p">,</span> <span class="s1">&#39;Footprint&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Facebook&#39;</span><span class="p">,</span> <span class="s1">&#39;Twitter&#39;</span><span class="p">,</span> <span class="s1">&#39;Groupon&#39;</span><span class="p">,</span> <span class="s1">&#39;Yelp&#39;</span><span class="p">,</span> <span class="s1">&#39;Tripadvisor&#39;</span><span class="p">,</span> <span class="s1">&#39;Trustpilot&#39;</span><span class="p">,</span> <span class="s1">&#39;Homeadvisor&#39;</span><span class="p">,</span> <span class="s1">&#39;Houzz&#39;</span><span class="p">,</span> <span class="s1">&#39;Instagram&#39;</span><span class="p">,</span> <span class="s1">&#39;Linkedin&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;Website Present&#39;</span><span class="p">,</span> <span class="s1">&#39;Popular Score&#39;</span><span class="p">,</span> <span class="s1">&#39;Content Score&#39;</span><span class="p">,</span> <span class="s1">&#39;Website Status&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Postings&#39;</span><span class="p">,</span> <span class="s1">&#39;Sentiment Score&#39;</span><span class="p">]</span>
+<span class="n">type_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">,</span> <span class="s1">&#39;numeric&#39;</span><span class="p">]</span>
+<span class="n">type_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Variable Name&#39;</span><span class="p">:</span> <span class="n">variable_list</span><span class="p">,</span> <span class="s1">&#39;Data Type&#39;</span><span class="p">:</span> <span class="n">type_list</span><span class="p">})</span>
+
+<span class="n">selected_features_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s1">&#39;Average Daily Balance&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Content Score&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Deposit Count&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Deposit Count 30&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Deposit Count 60&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Deposit Count 90&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Deposit Sum&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Deposit Sum 30 MA&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Deposit Sum 60 MA&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Deposit Sum 90 MA&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Facebook_1&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Footprint_0&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Footprint_1&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Footprint_2&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Footprint_3&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Groupon_0&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Groupon_1&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Homeadvisor_0&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Houzz_1&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Nsf Count&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Owner Credit Score&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Popular Score&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Sentiment Score&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Total Postings&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Twitter_0&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Website Present_0&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Website Present_1&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Website Status_Inactive&#39;</span><span class="p">,</span>
+       <span class="sa">u</span><span class="s1">&#39;Website Status_Null&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Years In Business&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Yelp_0&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;Yelp_1&#39;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="3.-Helper-Functions:-To-Create-Dummy-Features-and-Display-DataFrame">3. Helper Functions: To Create Dummy Features and Display DataFrame<a class="anchor-link" href="#3.-Helper-Functions:-To-Create-Dummy-Features-and-Display-DataFrame">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_dummy_features</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">dummy_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">prefix_sep</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">display_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">insight_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">df_new</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">insight_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_new</span><span class="p">[</span><span class="n">insight_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">insight_col</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;&#39;</span><span class="p">)</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">df_new</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">df_new</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="4.-Preprocessing-Steps-Before-Model-Training">4. Preprocessing Steps Before Model Training<a class="anchor-link" href="#4.-Preprocessing-Steps-Before-Model-Training">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="4.1-Reading-Training-Data,-Renaming-Columns,-and-Handling-Null-Values">4.1 Reading Training Data, Renaming Columns, and Handling Null Values<a class="anchor-link" href="#4.1-Reading-Training-Data,-Renaming-Columns,-and-Handling-Null-Values">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Reading Training Data</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">train_file_path</span><span class="p">)</span>
+
+<span class="c1"># Renaming Columns</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Deposit Sum 30</span><span class="se">\n</span><span class="s1">MA&#39;</span><span class="p">:</span> <span class="s1">&#39;Deposit Sum 30 MA&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Sum 60</span><span class="se">\n</span><span class="s1">MA&#39;</span><span class="p">:</span>\
+                              <span class="s1">&#39;Deposit Sum 60 MA&#39;</span><span class="p">,</span> <span class="s1">&#39;Deposit Sum 90</span><span class="se">\n</span><span class="s1">MA&#39;</span><span class="p">:</span> <span class="s1">&#39;Deposit Sum 90 MA&#39;</span><span class="p">})</span>
+
+<span class="c1"># Handling Null Values</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;Website Status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;Website Status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;Null&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="4.2-Sampling-the-Dataset,-Retaining-Key-Columns,-and-Creating-Dummy-Features">4.2 Sampling the Dataset, Retaining Key Columns, and Creating Dummy Features<a class="anchor-link" href="#4.2-Sampling-the-Dataset,-Retaining-Key-Columns,-and-Creating-Dummy-Features">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sampling the Dataset</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Retaining Key Columns</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">type_df</span><span class="p">[</span><span class="s1">&#39;Variable Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()]</span>
+
+<span class="c1"># List of Categorical Columns</span>
+<span class="n">cat_list</span> <span class="o">=</span> <span class="n">type_df</span><span class="p">[</span><span class="n">type_df</span><span class="p">[</span><span class="s1">&#39;Data Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;categorical&#39;</span><span class="p">][</span><span class="s1">&#39;Variable Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">cat_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ele</span> <span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="n">cat_list</span> <span class="k">if</span> <span class="n">ele</span> <span class="o">!=</span> <span class="n">outcome</span><span class="p">]</span>
+
+<span class="c1"># Creating Dummy Features</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">create_dummy_features</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">cat_list</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="4.3-Retaining-Selected-Features-and-Scaling-the-Dataset">4.3 Retaining Selected Features and Scaling the Dataset<a class="anchor-link" href="#4.3-Retaining-Selected-Features-and-Scaling-the-Dataset">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Retaining Selected Features</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">selected_features_list</span><span class="p">]</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">outcome</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">outcome</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Scaling the Dataset</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">outcome</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="5.-Training-XGBoost-Regressor-Model">5. Training XGBoost Regressor Model<a class="anchor-link" href="#5.-Training-XGBoost-Regressor-Model">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_name</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model_name</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="6.-Get-Explanations">6. Get Explanations<a class="anchor-link" href="#6.-Get-Explanations">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="6.1-Get-Explanations-for-5-Points">6.1 Get Explanations for 5 Points<a class="anchor-link" href="#6.1-Get-Explanations-for-5-Points">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Dictionary of Data Types</span>
+<span class="n">data_type_dict</span> <span class="o">=</span> <span class="n">type_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Variable Name&#39;</span><span class="p">)[</span><span class="s1">&#39;Data Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;record_number&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">scaler</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ez</span><span class="o">.</span><span class="n">ez_explain</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">outcome</span><span class="p">,</span> <span class="n">train_file_path</span><span class="p">,</span> <span class="n">test_file_path</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">data_type_dict</span><span class="p">,</span> <span class="n">selected_features_list</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="6.2-Display-Explanation-DataFrame">6.2 Display Explanation DataFrame<a class="anchor-link" href="#6.2-Display-Explanation-DataFrame">&#182;</a></h3>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14619,56 +14955,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;insights&#39;</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;insights&#39;</span><span class="p">][</span><span class="s1">&#39;columns&#39;</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ex_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;explanations&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> 
+<span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;explanations&#39;</span><span class="p">]:</span>
+    <span class="n">ex_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">ex_df</span><span class="p">)]</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+<span class="n">display_df</span><span class="p">(</span><span class="n">ex_df</span><span class="p">)</span>
 </pre></div>
 
      </div>
